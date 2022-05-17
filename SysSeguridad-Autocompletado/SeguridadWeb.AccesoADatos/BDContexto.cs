@@ -15,7 +15,7 @@ namespace SeguridadWeb.AccesoADatos
         public DbSet<Usuario> Usuario { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-O5GJIMR\MSSQLSERVER01;Initial Catalog=SeguridadWebdb;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-O5GJIMR;Initial Catalog=SeguridadWebdb;Integrated Security=True");
         }
     }
 }
