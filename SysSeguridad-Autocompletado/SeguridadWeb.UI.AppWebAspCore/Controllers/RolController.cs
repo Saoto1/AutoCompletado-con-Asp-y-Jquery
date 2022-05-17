@@ -17,6 +17,28 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
     public class RolController : Controller
     {
         RolBL rolBL = new RolBL();
+
+        #region AutoCompletado
+
+        public async Task<IActionResult> GetRol(string term)
+        {
+
+
+            var roles = new List<Rol>();
+           roles = await rolBL.ObtenerTodosAsync();
+
+            var result = (from U in roles
+                          where U.Nombre.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
+                          select new { value = U.Nombre }
+                          );
+
+            return Json(result);
+        }
+
+        #endregion
+
+        #region Metodos Crud
+
         // GET: RolController
         public async Task<IActionResult> Index(Rol pRol = null)
         {
@@ -111,5 +133,7 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
                 return View(pRol);
             }
         }
+
+        #endregion
     }
 }

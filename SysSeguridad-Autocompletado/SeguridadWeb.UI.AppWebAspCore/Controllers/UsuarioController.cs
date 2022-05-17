@@ -22,6 +22,61 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
 
         UsuarioBL usuarioBL = new UsuarioBL();
         RolBL rolBL = new RolBL();
+
+        #region AutoCompletado
+      
+
+        public async Task<IActionResult> GetNombre(string term)
+        {
+
+
+            var nombres = new List<Usuario>();
+            nombres = await usuarioBL.ObtenerTodosAsync();
+
+            var result = (from U in nombres
+                          where U.Nombre.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
+                          select new { value = U.Nombre }
+                          );
+
+            return Json(result);
+        }
+
+        public async Task<IActionResult> GetApellido(string term)
+        {
+
+
+            var apellido =  new List<Usuario>();
+            apellido = await usuarioBL.ObtenerTodosAsync();
+
+            var result = (from U in apellido
+                          where U.Apellido.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
+                          select new { value = U.Apellido }
+                          );
+
+            return Json(result);
+        }
+
+        public async Task<IActionResult> GetLogin(string term)
+        {
+
+
+            var login = new List<Usuario>();
+            login = await usuarioBL.ObtenerTodosAsync();
+
+            var result = (from U in login
+                          where U.Login.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
+                          select new { value = U.Login }
+                          );
+
+            return Json(result);
+        }
+
+
+        #endregion
+
+
+
+        #region Metodos Crud
         // GET: UsuarioController
         public async Task<IActionResult> Index(Usuario pUsuario = null)
         {
@@ -38,34 +93,7 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
             ViewBag.Roles = await taskObtenerTodosRoles;
             return View(usuarios);
         }
-        public async Task<IActionResult> GetRoles(string term)
-        {
-            //List<Rol> listaRoles = new List<Rol>()
-            //{
-            //    new Rol {Id = 1, Nombre="Linda"},
-            //    new Rol {Id = 2, Nombre="Hector"},
-            //    new Rol {Id = 3, Nombre="Juan"},
-            //    new Rol {Id = 4, Nombre="Raul"},
-            //    new Rol {Id = 5, Nombre="Willieam"},
-            //    new Rol {Id = 6, Nombre="Saul"},
-            //    new Rol {Id = 7, Nombre="Andy"}
-            //};
-
-            //var result = (from U in listaRoles
-            //              where U.Nombre.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
-            //              select new { value = U.Nombre }
-            //              );
-
-            var roles = new List<Rol>();
-            roles = await rolBL.ObtenerTodosAsync();
-
-            var result = (from U in roles
-                          where U.Nombre.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
-                          select new { value = U.Nombre }
-                          );
-
-            return Json(result);
-        }
+       
 
         // GET: UsuarioController/Details/5
         public async Task<IActionResult> Details(int id)
@@ -160,6 +188,10 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
                 return View(usuario);
             }
         }
+
+        #endregion
+
+        #region Metodos de Sesion
         // GET: UsuarioController/Create
         [AllowAnonymous]
         public async Task<IActionResult> Login(string ReturnUrl = null)
@@ -235,5 +267,7 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
                 return View(usuarioActual);
             }
         }
+        #endregion
+
     }
 }

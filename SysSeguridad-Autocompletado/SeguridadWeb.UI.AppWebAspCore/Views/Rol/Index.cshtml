@@ -16,7 +16,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" />
+                        <input type="text" id="Rol" class="form-control" name="nombre" />
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -105,3 +105,14 @@
         </div>
     </div>
 }
+
+@section scripts{
+    <script>
+            $("#Rol").autocomplete({
+            source: '@Url.Action("GetRol", "Rol")',
+            minLength: 2
+        });
+
+    </script>
+
+ }

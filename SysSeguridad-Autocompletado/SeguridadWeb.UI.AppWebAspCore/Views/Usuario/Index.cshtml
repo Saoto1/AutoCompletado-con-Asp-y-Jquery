@@ -15,19 +15,19 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label">Nombre</label>
-                        <input type="text" class="form-control" name="nombre" />
+                        <input type="text" id="Nombre" class="form-control" name="nombre" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label">Apellido</label>
-                        <input type="text" class="form-control" name="apellido" />
+                        <input type="text" id="Apellido" class="form-control" name="apellido" />
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label">Login</label>
-                        <input type="text" class="form-control" name="login" />
+                        <input type="text" id="Login" class="form-control" name="login" />
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -76,14 +76,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <div class="form-group">
-                            <label class="control-label">Roles</label>
-                            <input id="Roles" type="text" name="autocomRoles" class="form-control" />
-                        </div>
-                    </div>
-                </div>
+              
             </div>
             <div class="form-group">
                 <input type="submit" value="Buscar" class="btn btn-primary" />
@@ -183,10 +176,22 @@
 @section scripts{
     <script>
 
-        $("#Roles").autocomplete({
-            source: '@Url.Action("GetRoles", "Usuario")',
-            minLength: 2 
+    
+           $("#Nombre").autocomplete({
+            source: '@Url.Action("GetNombre", "Usuario")',
+            minLength: 2
         });
+
+          $("#Apellido").autocomplete({
+            source: '@Url.Action("GetApellido", "Usuario")',
+            minLength: 2
+        });
+
+        $("#Login").autocomplete({
+            source: '@Url.Action("GetLogin", "Usuario")',
+            minLength: 2
+        });
+
     </script>
 
 }
