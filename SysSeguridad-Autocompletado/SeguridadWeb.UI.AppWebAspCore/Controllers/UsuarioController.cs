@@ -28,8 +28,6 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
 
         public async Task<IActionResult> GetNombre(string term)
         {
-
-
             var nombres = new List<Usuario>();
             nombres = await usuarioBL.ObtenerTodosAsync();
 
@@ -37,7 +35,6 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
                           where U.Nombre.Contains(term, System.StringComparison.CurrentCultureIgnoreCase)
                           select new { value = U.Nombre }
                           );
-
             return Json(result);
         }
 
@@ -58,7 +55,6 @@ namespace SeguridadWeb.UI.AppWebAspCore.Controllers
 
         public async Task<IActionResult> GetLogin(string term)
         {
-
 
             var login = new List<Usuario>();
             login = await usuarioBL.ObtenerTodosAsync();
